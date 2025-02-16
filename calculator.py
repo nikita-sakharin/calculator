@@ -7,6 +7,7 @@ OPERATORS = {
     '/': (2, 1, lambda x, y: x / y),
     '%': (2, 1, lambda x, y: x % y)}
 
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -34,6 +35,7 @@ class Node:
             else:
                 break
         return node
+
 
 class Tree:
     def __init__(self, root: Node):
@@ -214,13 +216,14 @@ def parse_number(expr: str, i: int) -> tuple:
         raise ValueError('incorrect number')
     return (float if dot else int)(''.join(token)), i
 
+
 assert [2, 3, '+'] == infix_to_postfix('2 + 3')
 assert [2, 3, '-'] == infix_to_postfix('2 - 3')
 assert [2, 3, '*'] == infix_to_postfix('2 * 3')
 assert [2, 3, '/'] == infix_to_postfix('2 / 3')
 assert [2, 3, '%'] == infix_to_postfix('2 % 3')
 
-assert [2, 3, '+']       == infix_to_postfix('2.0 + 3.0')
+assert [2, 3, '+'] == infix_to_postfix('2.0 + 3.0')
 assert [2.25, 3.75, '+'] == infix_to_postfix('2.25 + 3.75')
 
 assert [0, 1, '+', 2, '+', 3, '+'] == infix_to_postfix('0 + 1 + 2 + 3')
@@ -240,20 +243,20 @@ assert 10299 == calculate(
     ['ab', 'cd', 'ef', '*', '+', 'gh', '-'],
     {'ab': 100, 'cd': 101, 'ef': 102, 'gh': 103})
 
-assert parse_number('0', 0)                  == (0, 1)
-assert parse_number('.0', 0)                 == (0, 2)
-assert parse_number('0.', 0)                 == (0, 2)
-assert parse_number('0.0', 0)                == (0, 3)
-assert parse_number('1', 0)                  == (1, 1)
-assert parse_number('1.0', 0)                == (1, 3)
-assert parse_number('1234567890', 0)         == (1234567890, 10)
-assert parse_number('123456789.0', 0)        == (123456789, 11)
-assert parse_number('1234567890abcdef', 0)   == (1234567890, 10)
-assert parse_number('123456789.0abcdef', 0)  == (123456789, 11)
-assert parse_number('abcdef 1234567890', 7)  == (1234567890, 17)
+assert parse_number('0', 0) == (0, 1)
+assert parse_number('.0', 0) == (0, 2)
+assert parse_number('0.', 0) == (0, 2)
+assert parse_number('0.0', 0) == (0, 3)
+assert parse_number('1', 0) == (1, 1)
+assert parse_number('1.0', 0) == (1, 3)
+assert parse_number('1234567890', 0) == (1234567890, 10)
+assert parse_number('123456789.0', 0) == (123456789, 11)
+assert parse_number('1234567890abcdef', 0) == (1234567890, 10)
+assert parse_number('123456789.0abcdef', 0) == (123456789, 11)
+assert parse_number('abcdef 1234567890', 7) == (1234567890, 17)
 assert parse_number('abcdef 123456789.0', 7) == (123456789, 18)
-assert parse_number('1234567890 ', 0)        == (1234567890, 10)
-assert parse_number('123456789.0 ', 0)       == (123456789, 11)
+assert parse_number('1234567890 ', 0) == (1234567890, 10)
+assert parse_number('123456789.0 ', 0) == (123456789, 11)
 
 postfix = [0, 1, '+', 2, 3, '-', '*']
 tree = Tree.from_postfix(postfix)
